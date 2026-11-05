@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.hero{
+    margin-top: 7rem;
+}
+.hero-left{
+    height: 90vh;
+    background-color: beige;
+    width: 50%;
+}
+.hero-right{
+    height: 90vh;
+    background-color: rgb(92, 92, 0);
+    width: 50%;
+}
