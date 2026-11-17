@@ -3,6 +3,8 @@
 Restora is a web-based **Restaurant Management System** developed as an MCA academic project. It is designed strictly for single-restaurant, dine-in operations—allowing restaurant administrators and staff to manage menu categories, food items, tables, dine-in orders, kitchen status updates, billing, payments, and sales reports.
 
 ---
+# USERNAME: admin
+# PASSWORD Admin@123
 
 ## Project Scope
 
