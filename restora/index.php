@@ -1,14 +1,7 @@
-
 <?php
 session_start();
-
-// If already logged in, go to dashboard
-if (isset($_SESSION['user_id'])) {
-    header("Location: admin/dashboard/index.php");
-    exit();
-}
+$isLoggedIn = isset($_SESSION['user_id']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,218 +11,114 @@ if (isset($_SESSION['user_id'])) {
 
     <title>Restora | Restaurant Management System</title>
 
+    <!-- Bootstrap 5 CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
+    <!-- Bootstrap Icons -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
         rel="stylesheet"
     >
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            color: #212529;
-        }
-
-        .navbar {
-            background: #ffffff;
-            padding: 18px 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-        }
-
-        .navbar-brand {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #212529;
-        }
-
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(
-                135deg,
-                #f8f9fa,
-                #e9ecef
-            );
-            padding: 70px 20px;
-        }
-
-        .hero-content {
-            max-width: 750px;
-            margin: auto;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 6vw, 64px);
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #dc6b35;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #6c757d;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-
-        .btn-login {
-            background: #212529;
-            color: #ffffff;
-            padding: 14px 35px;
-            border-radius: 7px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .btn-login:hover {
-            background: #dc6b35;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        .features {
-            padding: 65px 20px;
-            background: #ffffff;
-        }
-
-        .feature-card {
-            padding: 30px 20px;
-            text-align: center;
-            border: 1px solid #eeeeee;
-            border-radius: 12px;
-            height: 100%;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-        }
-
-        .feature-card i {
-            font-size: 35px;
-            color: #dc6b35;
-            margin-bottom: 15px;
-        }
-
-        footer {
-            padding: 22px;
-            background: #212529;
-            color: #ffffff;
-            text-align: center;
-        }
-    </style>
+    <!-- Custom Style CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container d-flex justify-content-between align-items-center">
-
-            <a href="index.php" class="navbar-brand text-decoration-none">
+    <!-- Top Navbar -->
+    <nav class="navbar main-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">
                 RESTORA
             </a>
 
-            <a href="admin/auth/login.php" class="btn btn-dark px-4">
-                <i class="bi bi-box-arrow-in-right me-2"></i>
-                Login
-            </a>
-
+            <?php if ($isLoggedIn): ?>
+                <a href="admin/dashboard/index.php" class="btn btn-restora btn-sm">
+                    <i class="bi bi-grid me-1"></i> Dashboard
+                </a>
+            <?php else: ?>
+                <a href="admin/auth/login.php" class="btn btn-restora btn-sm">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                </a>
+            <?php endif; ?>
         </div>
     </nav>
 
-
     <!-- Hero Section -->
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <span class="badge bg-warning text-dark mb-3 px-3 py-2">
-                Restaurant Management System
-            </span>
-
-            <h1>
-                Manage Your Restaurant
-                <span>Smarter.</span>
-            </h1>
-
-            <p>
-                Restora helps restaurant staff manage food menus,
-                dining tables, customer orders, kitchen operations
-                and billing — all in one place.
-            </p>
-
-            <a href="admin/auth/register.php" class="btn-login">
-                Get Started
-                <i class="bi bi-arrow-right ms-2"></i>
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- Features Section -->
-    <section class="features">
-
+    <section class="hero-section">
         <div class="container">
 
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Everything You Need</h2>
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <div class="hero-card text-center">
 
-                <p class="text-muted">
-                    Simplify your daily restaurant operations.
-                </p>
+                        <span class="hero-badge">
+                            Dine-In Restaurant Management
+                        </span>
+
+                        <h1 class="hero-title">
+                            Welcome to RESTORA
+                        </h1>
+
+                        <p class="hero-text">
+                            A simple and reliable restaurant management system for handling menu items, table occupancy, dine-in orders, kitchen tracking, billing, and daily sales reports.
+                        </p>
+
+                        <?php if ($isLoggedIn): ?>
+                            <a href="admin/dashboard/index.php" class="btn-restora">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                Open Dashboard
+                            </a>
+                        <?php else: ?>
+                            <a href="admin/auth/login.php" class="btn-restora">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                Admin & Staff Login
+                            </a>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
             </div>
 
+            <!-- Key Highlights -->
             <div class="row g-4">
 
                 <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="bi bi-egg-fried"></i>
-                        <h5 class="fw-bold">Menu Management</h5>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+                        <h5 class="fw-bold">Table & Order Control</h5>
                         <p class="text-muted mb-0">
-                            Organize food categories, menu items and prices.
+                            Track available and occupied tables in real time and create dine-in orders quickly.
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="bi bi-grid-3x3-gap"></i>
-                        <h5 class="fw-bold">Table Management</h5>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-egg-fried"></i>
+                        </div>
+                        <h5 class="fw-bold">Menu & Kitchen Flow</h5>
                         <p class="text-muted mb-0">
-                            Manage dining tables and their availability.
+                            Manage food categories, item availability, and live kitchen preparation statuses.
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="bi bi-receipt"></i>
-                        <h5 class="fw-bold">Orders & Billing</h5>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+                        <h5 class="fw-bold">Billing & Reports</h5>
                         <p class="text-muted mb-0">
-                            Handle dine-in orders, payments and invoices.
+                            Generate clean customer invoices in INR (₹), record payments, and review daily sales.
                         </p>
                     </div>
                 </div>
@@ -237,16 +126,17 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
         </div>
-
     </section>
 
-
     <!-- Footer -->
-    <footer>
-        <p class="mb-0">
-            &copy; <?= date("Y") ?> Restora. All Rights Reserved.
-        </p>
+    <footer class="main-footer">
+        <div class="container">
+            &copy; <?= date("Y") ?> Restora — Restaurant Management System
+        </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
