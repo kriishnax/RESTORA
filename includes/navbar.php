@@ -14,7 +14,7 @@ $userRole = $_SESSION['user_role'] ?? 'Staff';
 <!-- Main Content -->
 <main class="main-content">
 
-    <!-- Topbar -->
+
     <div class="topbar">
 
         <div class="d-flex align-items-center gap-3">

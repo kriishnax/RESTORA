@@ -54,9 +54,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
                     <li class="nav-item">
                         <a class="nav-link" href="#workflow">How It Works</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#roles">User Roles</a>
-                    </li>
                 </ul>
 
                 <div class="d-flex">
@@ -280,7 +277,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
     </section>
 
     <!-- Role Access Section -->
-    <section id="roles" class="section-padding">
+    <!-- <section id="roles" class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
                 <span class="section-tag">Access Control</span>
@@ -332,10 +329,10 @@ $isLoggedIn = isset($_SESSION['user_id']);
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Bottom CTA Banner -->
-    <section class="pb-5">
+    <!-- <section class="pb-5">
         <div class="container">
             <div class="cta-banner text-center">
                 <h3 class="fw-bold mb-2">Ready to Manage Today's Service?</h3>
@@ -353,7 +350,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
                 <?php endif; ?>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Footer -->
     <footer class="main-footer">

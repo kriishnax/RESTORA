@@ -2,7 +2,6 @@
 require_once "../../includes/auth_check.php";
 require_once "../../config/database.php";
 
-// Helper function to fetch single count
 function getCount($conn, $sql) {
     $result = $conn->query($sql);
 
@@ -13,25 +12,24 @@ function getCount($conn, $sql) {
     return 0;
 }
 
-// Total categories
+
 $totalCategories = getCount(
     $conn,
     "SELECT COUNT(*) AS total FROM categories"
 );
 
-// Total menu items
+
 $totalMenuItems = getCount(
     $conn,
     "SELECT COUNT(*) AS total FROM menu_items"
 );
 
-// Total restaurant tables
 $totalTables = getCount(
     $conn,
     "SELECT COUNT(*) AS total FROM restaurant_tables"
 );
 
-// Available tables
+
 $availableTables = getCount(
     $conn,
     "SELECT COUNT(*) AS total
@@ -39,7 +37,7 @@ $availableTables = getCount(
      WHERE status = 'Available'"
 );
 
-// Today's orders (excluding cancelled orders)
+
 $todayOrders = getCount(
     $conn,
     "SELECT COUNT(*) AS total
@@ -48,7 +46,7 @@ $todayOrders = getCount(
      AND order_status != 'Cancelled'"
 );
 
-// Today's sales (paid, non-cancelled orders)
+
 $salesResult = $conn->query(
     "SELECT COALESCE(SUM(total_amount), 0) AS total
      FROM orders
@@ -75,12 +73,11 @@ $recentOrders = $conn->query(
      INNER JOIN restaurant_tables rt
         ON o.table_id = rt.id
      ORDER BY o.id DESC
-     LIMIT 5"
+     LIMIT 3"
 );
 
 $userName = $_SESSION['user_name'] ?? 'Admin';
 
-// Page layout variables
 $pageTitle = "Restora | Dashboard";
 $pageHeading = "Dashboard";
 $pageSubtitle = "Restaurant overview";
@@ -90,7 +87,7 @@ include_once "../../includes/sidebar.php";
 include_once "../../includes/navbar.php";
 ?>
 
-<!-- Welcome -->
+
 <div class="mb-4">
     <h3 class="fw-bold">
         Welcome back, <?= $userName ?>!
@@ -100,13 +97,13 @@ include_once "../../includes/navbar.php";
     </p>
 </div>
 
-<!-- Statistics Cards -->
+
 <div class="row g-4 mb-4">
 
     <div class="col-sm-6 col-xl-3">
         <div class="stat-card">
             <div class="stat-icon orange">
-                <i class="bi bi-egg-fried"></i>
+                <i class="bi bi-fork-knife"></i>
             </div>
             <h3><?= $totalMenuItems ?></h3>
             <p>Total Menu Items</p>
@@ -145,7 +142,7 @@ include_once "../../includes/navbar.php";
 
 </div>
 
-<!-- Today's Sales -->
+
 <div class="row g-4 mb-4">
     <div class="col-md-6">
         <div class="stat-card">
@@ -158,7 +155,7 @@ include_once "../../includes/navbar.php";
     </div>
 </div>
 
-<!-- Recent Orders -->
+
 <div class="content-card">
 
     <h5>
